@@ -18,6 +18,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useRecoilState } from "recoil";
 import { userState } from "../atom/userAtom";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Sidebar() {
   const router = useRouter();
@@ -63,11 +64,11 @@ export default function Sidebar() {
       <div className="mt-4 mb-2.5 xl:items-start">
         <SidebarMenuItem text="Home" Icon={HomeIcon} active />
 
-        <SidebarMenuItem text="Trends" Icon={HashtagIcon} />
+        <SidebarMenuItem text="Communities" Icon={HashtagIcon} />
         {currentUser && (
           <>
             <SidebarMenuItem text="Profile" Icon={UserIcon} />
-            <SidebarMenuItem text="Notifications" Icon={BellIcon} />
+            <Link href={'/notifications'}><SidebarMenuItem text="Notifications" Icon={BellIcon} /></Link>
             <SidebarMenuItem text="Messages" Icon={InboxIcon} />
             <SidebarMenuItem text="More" Icon={DotsCircleHorizontalIcon} />
           </>
