@@ -7,6 +7,8 @@ import {
   ClipboardIcon,
   DotsCircleHorizontalIcon,
   DotsHorizontalIcon,
+  FlagIcon,
+  HandIcon,
   HashtagIcon,
   InboxIcon,
   UserIcon,
@@ -16,11 +18,13 @@ import { useEffect } from "react";
 import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useRecoilState } from "recoil";
-import { userState } from "../atom/userAtom";
+import { joinedCommunity, userState } from "../atom/userAtom";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
 export default function Sidebar() {
+  const [joinedCommunities, setJoinedCommunities] = useRecoilState(joinedCommunity)
+
   const router = useRouter();
   const [currentUser, setCurrentUser] = useRecoilState(userState);
   console.log(currentUser);
@@ -62,15 +66,24 @@ export default function Sidebar() {
       {/* Menu */}
 
       <div className="mt-4 mb-2.5 xl:items-start">
-        <SidebarMenuItem text="Home" Icon={HomeIcon} active />
-
-        <SidebarMenuItem text="Communities" Icon={HashtagIcon} />
+        <Link href={'/'}><SidebarMenuItem text="Home" Icon={HomeIcon} active /></Link>
+        <Link href={'/communities'}><SidebarMenuItem text="Communities" Icon={FlagIcon} /></Link>
         {currentUser && (
           <>
             <SidebarMenuItem text="Profile" Icon={UserIcon} />
             <Link href={'/notifications'}><SidebarMenuItem text="Notifications" Icon={BellIcon} /></Link>
             <SidebarMenuItem text="Messages" Icon={InboxIcon} />
-            <SidebarMenuItem text="More" Icon={DotsCircleHorizontalIcon} />
+            <div className="mt-4">
+        <h3 className="text-lg font-semibold mb-2">Joined Communities</h3>
+        <ul>
+          {joinedCommunities.map(community => (
+            <li key={community} className="flex items-center space-x-2">
+              <img src={community.image} alt={name} className="w-8 h-8 rounded-full" />
+              <span>{community.name}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
           </>
         )}
       </div>
