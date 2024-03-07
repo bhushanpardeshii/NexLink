@@ -27,7 +27,7 @@ export default function Sidebar() {
 
   const router = useRouter();
   const [currentUser, setCurrentUser] = useRecoilState(userState);
-  console.log(currentUser);
+
   const auth = getAuth();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -70,7 +70,7 @@ export default function Sidebar() {
         <Link href={'/communities'}><SidebarMenuItem text="Communities" Icon={FlagIcon} /></Link>
         {currentUser && (
           <>
-            <SidebarMenuItem text="Profile" Icon={UserIcon} />
+            <Link href={'/profile'}><SidebarMenuItem text="Profile" Icon={UserIcon} /></Link>
             <Link href={'/notifications'}><SidebarMenuItem text="Notifications" Icon={BellIcon} /></Link>
             <SidebarMenuItem text="Messages" Icon={InboxIcon} />
             <div className="mt-4">
