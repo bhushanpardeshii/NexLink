@@ -72,6 +72,7 @@ export default function Sidebar() {
           <>
             <Link href={'/profile'}><SidebarMenuItem text="Profile" Icon={UserIcon} /></Link>
             <Link href={'/notifications'}><SidebarMenuItem text="Notifications" Icon={BellIcon} /></Link>
+            <Link href={'/gemini'}><SidebarMenuItem text="Ask me" Icon={HashtagIcon} /></Link>
             <SidebarMenuItem text="Messages" Icon={InboxIcon} />
             <div className="mt-4">
         <h3 className="text-lg font-semibold mb-2">Joined Communities</h3>
